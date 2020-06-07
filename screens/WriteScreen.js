@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import {Header, Button} from 'react-native-elements';
+import db from '../config'
+import firebase from 'firebase'
 
 export default class WriteScreen extends React.Component {
     constructor(props){
@@ -11,6 +13,19 @@ export default class WriteScreen extends React.Component {
             author: '',
             storyText: '',
         }
+    }
+
+    submitStory = ()=>{
+        db.collection("stories").add({
+            title: this.state.title,
+            author: this.state.author,
+            storyText: this.state.storyText,
+        })
+        this.setState({
+            title: '',
+            author: '',
+            storyText: ''
+        })
     }
 
     render(){
@@ -57,6 +72,7 @@ export default class WriteScreen extends React.Component {
                 <Button
                     title="Submit"
                     buttonStyle={styles.submitButton}
+                    onPress={this.submitStory}
                     containerStyle={{width: 80, height:40, alignSelf: "center"}}
                     raised
                 />
