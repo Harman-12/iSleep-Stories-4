@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
-import {Header, Button} from 'react-native-elements';
+import {Header} from 'react-native-elements';
 import db from '../config'
-import firebase from 'firebase'
 
 export default class WriteScreen extends React.Component {
     constructor(props){
@@ -69,13 +68,11 @@ export default class WriteScreen extends React.Component {
                     style={styles.storyText}
                     multiline={true}/>
                 
-                <Button
-                    title="Submit"
-                    buttonStyle={styles.submitButton}
-                    onPress={this.submitStory}
-                    containerStyle={{width: 80, height:40, alignSelf: "center"}}
-                    raised
-                />
+                <TouchableOpacity
+                    style={styles.submitButton}
+                    onPress={this.submitStory}>
+                    <Text style={styles.buttonText}>Submit</Text>
+                </TouchableOpacity>
             </View>
         );
     }
